@@ -4,7 +4,12 @@ Changelog
 5.1 (unreleased)
 ----------------
 
-- Nothing changed yet.
+Bug fixes
++++++++++
+
+- Fix case where multiple indexes with similar name seperated by ``_`` were interpreted as options.
+  Fixes #78.
+  [thet]
 
 
 5.0.1 (2019-06-17)
@@ -13,7 +18,7 @@ Changelog
 Bug fixes
 +++++++++
 
-- Fix sorting of index overview table in ZMI. Migrated the template from 
+- Fix sorting of index overview table in ZMI. Migrated the template from
   to zpt.
   (`#62 <https://github.com/zopefoundation/Products.ZCatalog/issues/62>`_)
 
