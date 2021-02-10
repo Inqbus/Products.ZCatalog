@@ -921,16 +921,18 @@ class Catalog(Persistent, Acquisition.Implicit, ExtensionClass.Base):
             lopez 4
             meier 2
 
-        Even if the two first data sets suffice for the requirement limit=2 the third dataset have to be take into account
-        when sorting on both indexes.
+        Even if the two first data sets suffice for the requirement limit=2 the
+        third dataset have to be take into account when sorting on both
+        indexes.
 
         For multiple indexes the strategy is :
         1) For the first index get the index_values for all documents
-            Result :
+            Result:
             ['meier', 'lopez', 'meier', 'smith']
 
-        2) Sort the index_values using heapq to get the 'limit' largest/smallest index_values
-            Result :
+        2) Sort the index_values using heapq to get the 'limit'
+           largest/smallest index_values
+           Result:
             ['lopez', 'meier']
 
         3) Find all documents having index_values 'lopez' or 'meier'
@@ -987,20 +989,21 @@ class Catalog(Persistent, Acquisition.Implicit, ExtensionClass.Base):
             if last_index_value != current_index_value:
                 # We have a fresh index_value
                 # store all belonging documents
-                all_documents_for_sorting += list(sort_index._index[current_index_value])
+                all_documents_for_sorting += list(
+                    sort_index._index[current_index_value])
                 # remenber the index_value for duplicate checking
                 last_index_value = current_index_value
 
         # Step 4) Get the index_values for the other search indexes
         # The sort_set includes the list of index_values per document
         sort_set = []
-        for did in  all_documents_for_sorting:
+        for did in all_documents_for_sorting:
             # get the primary index_value
             idx = index_key_map[did]
             # add the secondary index values
             full_key = (idx, )
             for km in second_indexes_key_map:
-                    full_key += (km[did], )
+                full_key += (km[did], )
             sort_set.append((full_key, did, self.__getitem__))
 
         # Step 5) Sort after the secondary indexes.
